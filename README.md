@@ -1,6 +1,5 @@
 # qft-cosmo
 Final Project for Winter 2024 QFT in Cosmology at Perimeter Institute (with Achim Kempf). 
-
 Numerical simulations of quantum field fluctuations important for cosmological processes. 
 Hopefully will add more spacetimes to explore such as FRLW (and maybe Schwarzschild).
 
