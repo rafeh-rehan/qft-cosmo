@@ -223,43 +223,4 @@ def main1():
   plt.close()
   
   
-  #
-  # Plotting time varying field amplitudes movies! # Ignore this in submission for now?
-  # 
-  
-  
-  # NOTE!! That this is essentially the same, in the case of Minkowski spacetime, as recalculating \phi(\bold x,t) at different time intervals, as this would emulate the behaviour of \phi_n(t) as a time dependent fluctuating fourier coefficient?
-  #
-  
-  ts = np.linspace(0,10)
-  phis_2dt_0 = phi_2d(xs,ys,ts[0]) # initialize 
-  d = 2
-  
-  # Plot in 2D (varying t)
-  # Plot initial map
-  fig = plt.figure(6)
-  fig.suptitle(rf"$\varphi(\vec x)$ fluctuations in {d}D")
-  fig.supxlabel(r"$x$")
-  fig.supylabel(r"$y$")
-  ax = fig.add_subplot(111)
-  heatmap2Dt = ax.imshow(phis_2dt_0, extent=[-1/2, 1/2, -1/2, 1/2], cmap="seismic")
-  # Show heat map
-  fig.colorbar(heatmap2Dt)
-  plt.show(block=False)
-  
-  # Update time and re-plot
-  for i in range(1,len(ts)):
-    t = ts[i]
-    # time sleep maybe if too fast
-#    time.sleep(0.01)
-    # recalculate for at new time step
-    phis_2dt_step = phi_2d(xs,ys,t)
-    #replace imshow image contents
-    heatmap2Dt.set_array(phis_2dt_step)
-    # redraw the new plot
-    fig.canvas.draw()
-    fig.canvas.flush_events()
-    
-  
-  
 if __name__ == "__main__": main1()
