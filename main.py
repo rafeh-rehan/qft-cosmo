@@ -146,7 +146,7 @@ def main1():
         dd = np.random.random()
         phi_n = n_cdfinv(nn,dd)
         # Calculate the sum for phi(x)
-        s = s + (2/L)**(d/2)*phi_n*np.sin(np.pi/L*(n_1*x + n_2*y)-omega_n(nn)*t)
+        s = s + (2/L)**(d/2)*phi_n*np.sin(np.pi/L*n_1*x-omega_n(nn)*t)*np.sin(np.pi/L*n_2*y-omega_n(nn)*t)
     
     return s
   
@@ -169,7 +169,7 @@ def main1():
           dd = np.random.random()
           phi_n = n_cdfinv(nn,dd)
           # Calculate the sum for phi(x)
-          s = s + (2/L)**(d/2)*phi_n*np.sin(np.pi/L*(n_1*x + n_2*y + n_3*0)-omega_n(nn)*t)
+          s = s + (2/L)**(d/2)*phi_n*np.sin(np.pi/L*n_1*x-omega_n(nn)*t)*np.sin(np.pi/L*n_2*y-omega_n(nn)*t)*np.sin(np.pi/L*n_3*0.5-omega_n(nn)*t)
             
     return s
   
@@ -182,14 +182,15 @@ def main1():
   # Set size of the box
   L = 1
   # Set number of Fourier Coefficients
-  n = 20  #20 - good middle
+  n = 10  #20 - good middle
   
   
   
   # Parameters
-  x = np.linspace(-1/2,1/2,100)
+  x = np.linspace(0,L,100)
   t = 0 # Work with single time slice for now
   d = 2
+  
 
   # Plot in 2D (t=0)
   xs, ys = np.meshgrid(x, x)
@@ -199,10 +200,10 @@ def main1():
   plt.title(rf"$\varphi(\vec x)$ fluctuations in {d}D")
   plt.xlabel(r"$x$")
   plt.ylabel(r"$y$")
-  heatmap_2D = plt.imshow(phis_2d, extent =[-1/2, 1/2, -1/2, 1/2], cmap="seismic")
+  heatmap_2D = plt.imshow(phis_2d, extent=[0, 1, 0, 1], cmap="seismic")
   plt.colorbar(heatmap_2D)
   plt.savefig(f"./x{d}D_m{m}-L{L}-n{n}.pdf")
-  plt.close()
+#  plt.close()
   
   
   # Plot in 3D (t=0)
@@ -217,10 +218,10 @@ def main1():
   plt.title(rf"$\varphi(\vec x)$ fluctuations in {d}D")
   plt.xlabel(r"$x$")
   plt.ylabel(r"$y$")
-  heatmap_3D = plt.imshow(phis_3d, extent =[-1/2, 1/2, -1/2, 1/2], cmap="seismic")
+  heatmap_3D = plt.imshow(phis_3d, extent=[0, 1, 0, 1], cmap="seismic")
   plt.colorbar(heatmap_3D)
   plt.savefig(f"./x{d}D_m{m}-L{L}-n{n}.pdf")
-  plt.close()
+#  plt.close()
   
   
 if __name__ == "__main__": main1()
